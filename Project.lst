@@ -1,8 +1,9 @@
-Microsoft (R) Macro Assembler Version 14.43.34808.0	    03/04/25 19:53:52
+Microsoft (R) Macro Assembler Version 14.43.34808.0	    03/05/25 15:59:17
 AddTwo.asm						     Page 1 - 1
 
 
-				;result = (m + n) - o
+				;;;;;;;;;;;;;;;;;;;;;;
+				;QUESTION 1 (a+b)-b
 				.386
 				.model flat, stdcall
 				.stack 4096
@@ -49,7 +50,6 @@ SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .MODEL ignor
  00000014  66| A3		mov result,ax
 	   00000010 R
 
-
  0000001A  BA 00000000 R	mov edx, offset message
  0000001F  E8 00000000 E	call WriteString
 
@@ -63,7 +63,41 @@ SmallWin.inc(11) : warning A4011:multiple .MODEL directives found : .MODEL ignor
 
  0000003C			main endp
 				end main
-Microsoft (R) Macro Assembler Version 14.43.34808.0	    03/04/25 19:53:52
+
+
+				QUESTION 2 (m+n)-o
+				.386
+				.model flat, stdcall
+				.stack 4096
+				include Irvine32.inc
+
+				;-->Data segment to make variables
+				.data
+				message db "Result is: ",0
+				m word 200
+				n dword 10000
+				o word 150
+				result dword o
+
+				.code
+				main proc
+				movzx eax,m
+				add eax,n
+				movzx edx,o
+				sub eax,edx
+				mov result,eax
+
+				mov edx, offset message
+				call WriteString
+				call WriteDec
+				call DumpRegs
+				invoke ExitProcess,0 
+
+				main endp
+				end main
+				;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Microsoft (R) Macro Assembler Version 14.43.34808.0	    03/05/25 15:59:17
 AddTwo.asm						     Symbols 2 - 1
 
 
